@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Filters from '@/components/filters/Filters';
 
 export default function ProductsLayout({
@@ -8,7 +8,9 @@ export default function ProductsLayout({
 }) {
 	return (
 		<section>
-			<Filters>{children}</Filters>
+			<Filters>
+				<Suspense>{children}</Suspense>
+			</Filters>
 		</section>
 	);
 }
