@@ -1,11 +1,14 @@
 import HotSales from '@/components/hotSales/hotSales';
 import Hero from '@/components/hero/hero';
+import { Suspense } from 'react';
 
-export default function HomePage() {
+export default async function HomePage() {
 	return (
 		<main>
-			<Hero />
-			<HotSales />
+			<Suspense>
+				<Hero />
+				{/*<HotSales />*/}
+			</Suspense>
 		</main>
 	);
 }

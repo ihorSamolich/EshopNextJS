@@ -4,6 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 const heros = [
 	'/hero1.webp',
 	'/hero2.webp',
@@ -17,6 +21,7 @@ const Hero = () => {
 	return (
 		<section className='overflow-hidden rounded-xl mx-auto mt-5'>
 			<Swiper
+				modules={[Navigation, Pagination, Autoplay]}
 				loop={true}
 				autoplay={{
 					delay: 5000,
@@ -24,7 +29,6 @@ const Hero = () => {
 				}}
 				navigation={true}
 				pagination={true}
-				modules={[Navigation, Pagination, Autoplay]}
 			>
 				{heros.map((hero, index) => (
 					<SwiperSlide key={index}>

@@ -1,20 +1,15 @@
 import ProductGrid from '@/components/products/grid/productList';
-import { productService } from '@/services/product.service';
+import { Suspense } from 'react';
 
 export const metadata = {
 	title: 'Products',
 	description: 'ESHOP products page.',
 };
 
-export default async function Products({
-	searchParams,
-}: {
-	searchParams?: {
-		selectedCategory?: string;
-	};
-}) {
-	const selectedCategory = searchParams?.selectedCategory || '';
-	const products = await productService.getProducts(selectedCategory);
-
-	return <ProductGrid products={products} />;
+export default function Products() {
+	return (
+		<Suspense>
+			<ProductGrid />
+		</Suspense>
+	);
 }

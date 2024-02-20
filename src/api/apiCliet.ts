@@ -5,5 +5,5 @@ interface IApiClientConfig extends AxiosRequestConfig {
 }
 
 export const apiClient: AxiosInstance = axios.create({
-	baseURL: 'http://localhost:5135',
+	baseURL: 'http://ihor.fun',
 } as IApiClientConfig);

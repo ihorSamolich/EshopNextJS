@@ -9,7 +9,7 @@ const ProductCard = ({ name, price, discount, photos }: IProduct) => {
 			<div className='aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 h-40 lg:h-80'>
 				<div className='relative w-full h-full'>
 					<Image
-						src={`http://localhost:5135/images/${photos[0]}`}
+						src={`http://ihor.fun/images/${photos[0]}`}
 						alt={name}
 						quality={70}
 						className='h-full w-full object-contain object-center lg:h-full lg:w-full p-5'

@@ -1,11 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Carousel from '@/components/carousel/carousel';
 import { productService } from '@/services/product.service';
 
-// interface IHotSalesProps {
-// 	products: IProduct[];
-// }
 const HotSales = async () => {
 	const hotProducts = await productService.getProductHotSales();
 

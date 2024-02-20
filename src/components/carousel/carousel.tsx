@@ -1,10 +1,13 @@
 'use client';
+
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import ProductCard from '@/components/products/card/productCard';
-
 import { IProduct } from '@/types/product.types';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface ICarouselProps {
 	products: IProduct[];

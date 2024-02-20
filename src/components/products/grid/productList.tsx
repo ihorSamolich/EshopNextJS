@@ -1,12 +1,24 @@
 import React from 'react';
 import ProductCard from '@/components/products/card/productCard';
 import { IProduct } from '@/types/product.types';
+import { productService } from '@/services/product.service';
 
-interface IProductGridProps {
-	products: IProduct[];
-}
+// interface IProductGridProps {
+// 	products: IProduct[];
+// }
 
-const ProductGrid = ({ products }: IProductGridProps) => {
+const ProductGrid = async ({
+	searchParams,
+}: {
+	searchParams?: {
+		selectedCategory?: string;
+	};
+}) => {
+	const selectedCategory = searchParams?.selectedCategory || '';
+	const products = await productService.getProducts(selectedCategory);
+
+	console.log(products);
+
 	return (
 		<div className='lg:col-span-3'>
 			<div className='mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8'>

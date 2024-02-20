@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     env: {
         SERVER_URL: process.env.SERVER_URL
     },
@@ -14,6 +14,10 @@ const nextConfig = {
                 protocol: 'http',
                 hostname: "localhost",
                 port: "5135"
+            },
+            {
+                protocol: 'http',
+                hostname: "ihor.fun",
             }
         ]
     }
