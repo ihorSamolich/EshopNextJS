@@ -8,9 +8,9 @@ export default function ProductsLayout({
 }) {
 	return (
 		<section>
-			<Filters>
-				<Suspense>{children}</Suspense>
-			</Filters>
+			<Suspense>
+				<Filters>{children}</Filters>
+			</Suspense>
 		</section>
 	);
 }
