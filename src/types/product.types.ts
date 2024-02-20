@@ -5,3 +5,8 @@ export interface IProduct {
 	discount: number;
 	photos: string[];
 }
+
+export interface IProductResponse {
+	count: number;
+	items: IProduct[];
+}

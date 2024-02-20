@@ -1,5 +1,5 @@
 import { apiClient } from '@/api/apiCliet';
-import { IProduct } from '@/types/product.types';
+import { IProduct, IProductResponse } from '@/types/product.types';
 
 class ProductService {
 	async getProductHotSales() {
@@ -8,10 +8,8 @@ class ProductService {
 	}
 
 	async getProducts(categoryId?: string) {
-		const response = await apiClient.get<IProduct[]>(
-			`/api/products${categoryId && `/category/${categoryId}`}`,
-		);
-		return response.data;
+		const response = await apiClient.get<IProductResponse>(`/api/products`);
+		return response.data.items;
 	}
 }
 
