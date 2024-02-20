@@ -7,7 +7,7 @@ export default async function HomePage() {
 		<main>
 			<Suspense>
 				<Hero />
-				{/*<HotSales />*/}
+				<HotSales />
 			</Suspense>
 		</main>
 	);
