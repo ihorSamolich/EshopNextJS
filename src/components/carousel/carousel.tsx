@@ -16,7 +16,7 @@ interface ICarouselProps {
 const Carousel = ({ products }: ICarouselProps) => {
 	return (
 		<Swiper
-			slidesPerView={4}
+			slidesPerView={1}
 			breakpoints={{
 				480: { slidesPerView: 2 },
 				740: { slidesPerView: 3 },

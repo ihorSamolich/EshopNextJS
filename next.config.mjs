@@ -16,7 +16,7 @@ const nextConfig = {
                 port: "5135"
             },
             {
-                protocol: 'http',
+                protocol: 'https',
                 hostname: "ihor.fun",
             }
         ]
