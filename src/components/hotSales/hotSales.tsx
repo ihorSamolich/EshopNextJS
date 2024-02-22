@@ -1,11 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Carousel from '@/components/carousel/carousel';
-import { productService } from '@/services/product.service';
+import { useProductsSales } from '@/hooks/product';
 
-const HotSales = async () => {
-	const hotProducts = await productService.getProductHotSales();
-
+const HotSales = () => {
 	return (
 		<section className='bg-white rounded-md mx-auto max-w-2xl py-8 lg:max-w-7xl px-5 mt-5'>
 			<div className='flex gap-5'>
@@ -19,7 +17,7 @@ const HotSales = async () => {
 					Більше товарів
 				</Link>
 			</div>
-			<Carousel products={hotProducts} />
+			<Carousel />
 		</section>
 	);
 };

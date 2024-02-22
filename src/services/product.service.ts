@@ -2,12 +2,12 @@ import { apiClient } from '@/api/apiCliet';
 import { IProduct, IProductResponse } from '@/types/product.types';
 
 class ProductService {
-	async getProductHotSales() {
+	async getProductSales() {
 		const response = await apiClient.get<IProduct[]>('/api/products/hot-sales');
 		return response.data;
 	}
 
-	async getProducts(categoryId?: string) {
+	async getProducts() {
 		const response = await apiClient.get<IProductResponse>(`/api/products`);
 		return response.data.items;
 	}

@@ -2,6 +2,7 @@ import React from 'react';
 import { IProduct } from '@/types/product.types';
 import Image from 'next/image';
 import ButtonBuy from '@/components/ui/buttonBuy/buttonBuy';
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const ProductCard = ({ name, price, discount, photos }: IProduct) => {
 	return (
@@ -9,7 +10,7 @@ const ProductCard = ({ name, price, discount, photos }: IProduct) => {
 			<div className='aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 h-40 lg:h-80'>
 				<div className='relative w-full h-full'>
 					<Image
-						src={`https://ihor.fun/images/${photos[0]}`}
+						src={`${URL}/images/${photos[0]}`}
 						alt={name}
 						quality={70}
 						className='h-full w-full object-contain object-center lg:h-full lg:w-full p-5'

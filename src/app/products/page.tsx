@@ -6,7 +6,7 @@ export const metadata = {
 	description: 'ESHOP products page.',
 };
 
-export default function Products() {
+export default function ProductsPage() {
 	return (
 		<Suspense>
 			<ProductGrid />

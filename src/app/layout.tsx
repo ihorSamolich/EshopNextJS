@@ -27,13 +27,13 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={roboto.className}>
-				<Navbar />
 				<Provider>
+					<Navbar />
 					<div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 						{children}
 					</div>
+					<Footer />
 				</Provider>
-				<Footer />
 			</body>
 		</html>
 	);

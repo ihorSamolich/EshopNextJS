@@ -9,7 +9,7 @@ import {
 import MobileFilters from '@/components/filters/MobileFilters';
 import FiltersDesktop from '@/components/filters/FiltersDesctop';
 import { classNames } from '@/utils/classNames';
-import { useCategoryNames } from '@/hooks/category/useCategoryNames';
+import { useCategoryNames } from '@/hooks/category';
 
 const sortOptions = [
 	{ name: 'Most Popular', href: '#', current: true },
@@ -21,13 +21,13 @@ const sortOptions = [
 
 const Filters = ({ children }: { children: React.ReactNode }) => {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false);
-	const { items: categoryNames } = useCategoryNames();
+	const { data } = useCategoryNames();
 
 	return (
 		<div className='bg-white'>
 			<div>
 				<MobileFilters
-					categoryNames={categoryNames}
+					categoryNames={data ? data : []}
 					filtersOpen={mobileFiltersOpen}
 					setFiltersOpen={setMobileFiltersOpen}
 				/>
@@ -108,7 +108,7 @@ const Filters = ({ children }: { children: React.ReactNode }) => {
 						</h2>
 
 						<div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4'>
-							<FiltersDesktop categoryNames={categoryNames} />
+							<FiltersDesktop categoryNames={data ? data : []} />
 							{children}
 						</div>
 					</section>

@@ -1,19 +1,17 @@
 'use client';
-
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import ProductCard from '@/components/products/card/productCard';
-import { IProduct } from '@/types/product.types';
+import { useProductsSales } from '@/hooks/product';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-interface ICarouselProps {
-	products: IProduct[];
-}
+const Carousel = () => {
+	const { data } = useProductsSales();
 
-const Carousel = ({ products }: ICarouselProps) => {
 	return (
 		<Swiper
 			slidesPerView={1}
@@ -31,7 +29,7 @@ const Carousel = ({ products }: ICarouselProps) => {
 			}}
 			modules={[Autoplay]}
 		>
-			{products.map(item => (
+			{data?.map(item => (
 				<SwiperSlide key={item.id}>
 					<ProductCard {...item} />
 				</SwiperSlide>
