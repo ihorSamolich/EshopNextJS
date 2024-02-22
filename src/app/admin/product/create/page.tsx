@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useCreateProduct } from '@/hooks/product';
 import { IProductCreate } from '@/types/product.types';
 import { useRouter } from 'next/navigation';
+import { useCategoryNames } from '@/hooks/category';
 const CreateProductPage = () => {
 	const createProduct = useCreateProduct();
 	const router = useRouter();
@@ -13,10 +14,13 @@ const CreateProductPage = () => {
 		reset,
 		formState: { errors },
 	} = useForm<IProductCreate>();
+	const { data } = useCategoryNames();
 
 	const onSubmit: SubmitHandler<IProductCreate> = data => {
-		createProduct.mutate(data);
-		router.push('/products');
+		console.log(data);
+
+		// createProduct.mutate(data);
+		// router.push('/products');
 	};
 
 	return (
@@ -30,12 +34,12 @@ const CreateProductPage = () => {
 									htmlFor='name'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									Name
+									Назва товару:
 								</label>
 								<div className='mt-2'>
 									<input
 										id='name'
-										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+										className='px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
 										type='text'
 										{...register('name', { required: true })}
 									/>
@@ -47,14 +51,14 @@ const CreateProductPage = () => {
 									htmlFor='description'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									Description
+									Опис товару:
 								</label>
 								<div className='mt-2'>
 									<textarea
 										id='description'
 										{...register('description', { required: true })}
 										rows={3}
-										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+										className='px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
 									/>
 								</div>
 							</div>
@@ -64,13 +68,13 @@ const CreateProductPage = () => {
 									htmlFor='price'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									Price
+									Ціна товару:
 								</label>
 								<input
 									id='price'
 									type='number'
 									{...register('price', { required: true })}
-									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+									className='px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
 								/>
 							</div>
 
@@ -79,13 +83,13 @@ const CreateProductPage = () => {
 									htmlFor='quantity'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									Quantity
+									К-сть товару:
 								</label>
 								<input
 									id='quantity'
 									type='number'
 									{...register('quantity', { required: true })}
-									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+									className='px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
 								/>
 							</div>
 
@@ -94,14 +98,23 @@ const CreateProductPage = () => {
 									htmlFor='categoryId'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									CategoryId
+									Категорія:
 								</label>
-								<input
+								<select
 									id='categoryId'
-									type='number'
 									{...register('categoryId', { required: true })}
-									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-								/>
+									className='px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+									defaultValue='-1'
+								>
+									<option value='-1' disabled>
+										Оберіть категорію:
+									</option>
+									{data?.map(item => (
+										<option key={item.id} value={item.id}>
+											{item.name}
+										</option>
+									))}
+								</select>
 							</div>
 
 							<div className='col-span-full'>
@@ -109,7 +122,7 @@ const CreateProductPage = () => {
 									htmlFor='images'
 									className='block text-sm font-medium leading-6 text-gray-900'
 								>
-									Images
+									Фото:
 								</label>
 								<input
 									className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
