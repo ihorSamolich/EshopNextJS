@@ -1,8 +1,27 @@
-import React from 'react';
+'use client';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import React, { useState } from 'react';
+import { useCreateProduct } from '@/hooks/product';
+import { IProductCreate } from '@/types/product.types';
+import { useRouter } from 'next/navigation';
 const CreateProductPage = () => {
+	const createProduct = useCreateProduct();
+	const router = useRouter();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm<IProductCreate>();
+
+	const onSubmit: SubmitHandler<IProductCreate> = data => {
+		createProduct.mutate(data);
+		router.push('/products');
+	};
+
 	return (
 		<div className='bg-white p-10'>
-			<form>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='space-y-12'>
 					<div className='border-b border-gray-900/10 pb-12'>
 						<div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
@@ -15,10 +34,10 @@ const CreateProductPage = () => {
 								</label>
 								<div className='mt-2'>
 									<input
-										type='text'
-										name='name'
 										id='name'
 										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+										type='text'
+										{...register('name', { required: true })}
 									/>
 								</div>
 							</div>
@@ -33,10 +52,9 @@ const CreateProductPage = () => {
 								<div className='mt-2'>
 									<textarea
 										id='description'
-										name='description'
+										{...register('description', { required: true })}
 										rows={3}
 										className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-										defaultValue={''}
 									/>
 								</div>
 							</div>
@@ -49,12 +67,10 @@ const CreateProductPage = () => {
 									Price
 								</label>
 								<input
-									type='number'
 									id='price'
-									name='price'
+									type='number'
+									{...register('price', { required: true })}
 									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-									placeholder='90210'
-									required
 								/>
 							</div>
 
@@ -66,12 +82,10 @@ const CreateProductPage = () => {
 									Quantity
 								</label>
 								<input
-									type='number'
 									id='quantity'
-									name='quantity'
+									type='number'
+									{...register('quantity', { required: true })}
 									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-									placeholder='90210'
-									required
 								/>
 							</div>
 
@@ -83,49 +97,27 @@ const CreateProductPage = () => {
 									CategoryId
 								</label>
 								<input
-									type='number'
 									id='categoryId'
-									name='categoryId'
+									type='number'
+									{...register('categoryId', { required: true })}
 									className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-									placeholder='90210'
-									required
 								/>
 							</div>
 
-							{/*<div className='col-span-full'>*/}
-							{/*	<label*/}
-							{/*		htmlFor='images'*/}
-							{/*		className='block text-sm font-medium leading-6 text-gray-900'*/}
-							{/*	>*/}
-							{/*		Images*/}
-							{/*	</label>*/}
-							{/*	<div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'>*/}
-							{/*		<div className='text-center'>*/}
-							{/*			<PhotoIcon*/}
-							{/*				className='mx-auto h-12 w-12 text-gray-300'*/}
-							{/*				aria-hidden='true'*/}
-							{/*			/>*/}
-							{/*			<div className='mt-4 flex text-sm leading-6 text-gray-600'>*/}
-							{/*				<label*/}
-							{/*					htmlFor='images'*/}
-							{/*					className='relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'*/}
-							{/*				>*/}
-							{/*					<span>Upload a file</span>*/}
-							{/*					<input*/}
-							{/*						id='images'*/}
-							{/*						name='images[]'*/}
-							{/*						type='file'*/}
-							{/*						className='sr-only'*/}
-							{/*					/>*/}
-							{/*				</label>*/}
-							{/*				<p className='pl-1'>or drag and drop</p>*/}
-							{/*			</div>*/}
-							{/*			<p className='text-xs leading-5 text-gray-600'>*/}
-							{/*				PNG, JPG, GIF up to 10MB*/}
-							{/*			</p>*/}
-							{/*		</div>*/}
-							{/*	</div>*/}
-							{/*</div>*/}
+							<div className='col-span-full'>
+								<label
+									htmlFor='images'
+									className='block text-sm font-medium leading-6 text-gray-900'
+								>
+									Images
+								</label>
+								<input
+									className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
+									{...register('images', { required: true })}
+									id='images'
+									type='file'
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -134,6 +126,7 @@ const CreateProductPage = () => {
 					<button
 						type='button'
 						className='text-sm font-semibold leading-6 text-gray-900'
+						onClick={() => reset()}
 					>
 						Cancel
 					</button>

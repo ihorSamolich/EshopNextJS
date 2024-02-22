@@ -1,5 +1,9 @@
 import { apiClient } from '@/api/apiCliet';
-import { IProduct, IProductResponse } from '@/types/product.types';
+import {
+	IProduct,
+	IProductCreate,
+	IProductResponse,
+} from '@/types/product.types';
 
 class ProductService {
 	async getProductSales() {
@@ -10,6 +14,15 @@ class ProductService {
 	async getProducts() {
 		const response = await apiClient.get<IProductResponse>(`/api/products`);
 		return response.data.items;
+	}
+
+	async createProduct(product: IProductCreate) {
+		const response = await apiClient.post('/api/products', product, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+		return response.data;
 	}
 }
 

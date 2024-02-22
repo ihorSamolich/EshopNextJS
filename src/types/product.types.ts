@@ -6,6 +6,16 @@ export interface IProduct {
 	photos: string[];
 }
 
+export interface IProductCreate {
+	name: string;
+	description: string;
+	price: number;
+	discount: number;
+	quantity: number;
+	categoryId: number;
+	images: File[];
+}
+
 export interface IProductResponse {
 	count: number;
 	items: IProduct[];
