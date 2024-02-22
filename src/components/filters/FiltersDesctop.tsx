@@ -4,6 +4,7 @@ import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { ICategoryName } from '@/types/category.types';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface IFiltersDesktopProps {
 	categoryNames: ICategoryName[];
@@ -21,6 +22,7 @@ const FiltersDesktop = ({ categoryNames }: IFiltersDesktopProps) => {
 		} else {
 			params.delete('selectedCategory');
 		}
+
 		replace(`${pathname}?${params.toString()}`);
 	}
 

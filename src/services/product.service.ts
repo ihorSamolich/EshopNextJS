@@ -4,6 +4,7 @@ import {
 	IProductCreate,
 	IProductResponse,
 } from '@/types/product.types';
+import { IQueryParameters } from '@/types/parameters.types';
 
 class ProductService {
 	async getProductSales() {
@@ -11,8 +12,10 @@ class ProductService {
 		return response.data;
 	}
 
-	async getProducts() {
-		const response = await apiClient.get<IProductResponse>(`/api/products`);
+	async getProducts(query: IQueryParameters) {
+		const response = await apiClient.get<IProductResponse>('/api/products', {
+			params: query,
+		});
 		return response.data.items;
 	}
 

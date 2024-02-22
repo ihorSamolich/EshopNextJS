@@ -1,14 +1,14 @@
 'use client';
-
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { productService } from '@/services/product.service';
 import { IProductCreate, IProductResponse } from '@/types/product.types';
+import { IQueryParameters } from '@/types/parameters.types';
 
-export const useProducts = () => {
+export const useProducts = (query: IQueryParameters) => {
 	return useQuery({
-		queryKey: ['products'],
-		queryFn: () => productService.getProducts(),
-		staleTime: Infinity,
+		queryKey: ['products', query],
+		queryFn: () => productService.getProducts(query),
+		staleTime: 0,
 	});
 };
 

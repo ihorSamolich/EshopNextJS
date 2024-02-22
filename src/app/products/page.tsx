@@ -6,10 +6,17 @@ export const metadata = {
 	description: 'ESHOP products page.',
 };
 
-export default function ProductsPage() {
+export default function ProductsPage({
+	searchParams,
+}: {
+	searchParams?: {
+		selectedCategory?: string;
+	};
+}) {
+	const selectedCategory = Number(searchParams?.selectedCategory) || 0;
 	return (
 		<Suspense>
-			<ProductGrid />
+			<ProductGrid selectedCategory={selectedCategory} />
 		</Suspense>
 	);
 }

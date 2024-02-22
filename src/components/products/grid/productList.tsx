@@ -1,13 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '@/components/products/card/productCard';
-import { IProduct, IProductResponse } from '@/types/product.types';
-import { productService } from '@/services/product.service';
 import { useProducts } from '@/hooks/product';
+import { IQueryParameters } from '@/types/parameters.types';
+interface IProductGridProps {
+	selectedCategory: number;
+}
 
-const ProductGrid = () => {
-	const { data } = useProducts();
+const ProductGrid = ({ selectedCategory }: IProductGridProps) => {
+	const query: IQueryParameters = {
+		categoryId: selectedCategory,
+		page: 1,
+		pageCount: 8,
+	};
+
+	const { data } = useProducts(query);
 
 	return (
 		<div className='lg:col-span-3'>
