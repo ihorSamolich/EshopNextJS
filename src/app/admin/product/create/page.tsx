@@ -17,10 +17,8 @@ const CreateProductPage = () => {
 	const { data } = useCategoryNames();
 
 	const onSubmit: SubmitHandler<IProductCreate> = data => {
-		console.log(data);
-
-		// createProduct.mutate(data);
-		// router.push('/products');
+		createProduct.mutate(data);
+		router.push('/products');
 	};
 
 	return (
