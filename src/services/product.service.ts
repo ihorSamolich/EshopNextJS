@@ -16,7 +16,7 @@ class ProductService {
 		const response = await apiClient.get<IProductResponse>('/api/products', {
 			params: query,
 		});
-		return response.data.items;
+		return response.data;
 	}
 
 	async createProduct(product: IProductCreate) {

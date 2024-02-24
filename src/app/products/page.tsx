@@ -11,12 +11,18 @@ export default function ProductsPage({
 }: {
 	searchParams?: {
 		selectedCategory?: string;
+		page?: string;
 	};
 }) {
 	const selectedCategory = Number(searchParams?.selectedCategory) || 0;
+	const currentPage = Number(searchParams?.page) || 1;
+
 	return (
 		<Suspense>
-			<ProductGrid selectedCategory={selectedCategory} />
+			<ProductGrid
+				currentPage={currentPage}
+				selectedCategory={selectedCategory}
+			/>
 		</Suspense>
 	);
 }
