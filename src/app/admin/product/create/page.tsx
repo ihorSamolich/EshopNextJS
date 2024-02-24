@@ -127,6 +127,7 @@ const CreateProductPage = () => {
 									{...register('images', { required: true })}
 									id='images'
 									type='file'
+									accept='image/jpeg, image/png, image/webp, image/gif'
 								/>
 							</div>
 						</div>
