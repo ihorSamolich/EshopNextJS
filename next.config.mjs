@@ -20,7 +20,12 @@ const nextConfig = {
                 hostname: "ihor.fun",
             }
         ]
-    }
+    },
+    experimental: {
+        serverActions: {
+            bodySizeLimit: '10mb',
+        },
+    },
 }
 
 export default nextConfig;
