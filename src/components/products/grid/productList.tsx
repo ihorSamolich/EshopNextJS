@@ -27,13 +27,12 @@ const ProductGrid = ({ selectedCategory, currentPage }: IProductGridProps) => {
 				<div className='flex flex-col items-center sm:grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
 					{data?.items?.map(item => <ProductCard key={item.id} {...item} />)}
 				</div>
-				<div className='flex items-center justify-center border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
-					<Pagination
-						currentPage={query.page}
-						count={data?.count || 0}
-						pageCount={query.pageCount}
-					/>
-				</div>
+
+				<Pagination
+					currentPage={query.page}
+					count={data?.count || 0}
+					pageCount={query.pageCount}
+				/>
 			</div>
 		</div>
 	);
