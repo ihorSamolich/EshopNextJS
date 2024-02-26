@@ -12,6 +12,14 @@ export const useProducts = (query: IQueryParameters) => {
 	});
 };
 
+export const useSingleProduct = (id: Number) => {
+	return useQuery({
+		queryKey: ['product', id],
+		queryFn: () => productService.getSingleProduct(id),
+		staleTime: 0,
+	});
+};
+
 export const useProductsSales = () => {
 	return useQuery({
 		queryKey: ['products-sales'],

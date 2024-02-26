@@ -6,6 +6,10 @@ export interface IProduct {
 	photos: string[];
 }
 
+export interface IProductDetail extends IProduct {
+	description: string;
+}
+
 export interface IProductCreate {
 	name: string;
 	description: string;

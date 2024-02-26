@@ -2,6 +2,7 @@ import { apiClient } from '@/api/apiCliet';
 import {
 	IProduct,
 	IProductCreate,
+	IProductDetail,
 	IProductResponse,
 } from '@/types/product.types';
 import { IQueryParameters } from '@/types/parameters.types';
@@ -25,6 +26,12 @@ class ProductService {
 				'Content-Type': 'multipart/form-data',
 			},
 		});
+		return response.data;
+	}
+
+	async getSingleProduct(id: Number) {
+		const response = await apiClient.get<IProductDetail>(`/api/products/${id}`);
+
 		return response.data;
 	}
 }
