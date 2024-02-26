@@ -19,6 +19,7 @@ const FiltersDesktop = ({ categoryNames }: IFiltersDesktopProps) => {
 		const params = new URLSearchParams(searchParams);
 		if (value) {
 			params.set('selectedCategory', value);
+			params.delete('page');
 		} else {
 			params.delete('selectedCategory');
 		}

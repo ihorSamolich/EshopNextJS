@@ -22,21 +22,23 @@ const MobileFilters = ({
 	const pathname = usePathname();
 	const { replace } = useRouter();
 
-	function handleSearch(value: string) {
-		const params = new URLSearchParams(searchParams);
-		if (value) {
-			params.set('selectedCategory', value);
-		} else {
-			params.delete('selectedCategory');
-		}
-		replace(`${pathname}?${params.toString()}`);
-	}
-
 	const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { id, name, checked, value } = e.target;
 
 		handleSearch(value);
 	};
+
+	function handleSearch(value: string) {
+		const params = new URLSearchParams(searchParams);
+		if (value) {
+			params.set('selectedCategory', value);
+			params.delete('page');
+		} else {
+			params.delete('selectedCategory');
+		}
+
+		replace(`${pathname}?${params.toString()}`);
+	}
 
 	return (
 		<Transition.Root show={filtersOpen} as={Fragment}>
@@ -68,7 +70,7 @@ const MobileFilters = ({
 						leaveTo='translate-x-full'
 					>
 						<Dialog.Panel className='relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl'>
-							<div className='flex items-center justify-between px-4'>
+							<div className='flex items-center justify-between px-4 mb-4'>
 								<h2 className='text-lg font-medium text-gray-900'>Filters</h2>
 								<button
 									type='button'
@@ -83,7 +85,7 @@ const MobileFilters = ({
 								<Disclosure
 									as='div'
 									key={'category'}
-									className='border-b border-gray-200 pb-6'
+									className='border-b border-t border-gray-200 p-4'
 								>
 									{({ open }) => (
 										<>
@@ -119,7 +121,11 @@ const MobileFilters = ({
 																type='radio'
 																value={item.id}
 																name='category'
-																//checked={selectedCategory === item.id}
+																checked={
+																	searchParams
+																		.get('selectedCategory')
+																		?.toString() === item.id.toString()
+																}
 																onChange={handleFilter}
 																className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300'
 															/>
