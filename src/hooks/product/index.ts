@@ -8,7 +8,7 @@ export const useProducts = (query: IQueryParameters) => {
 	return useQuery({
 		queryKey: ['products', query],
 		queryFn: () => productService.getProducts(query),
-		staleTime: 0,
+		staleTime: 30000,
 	});
 };
 
@@ -16,7 +16,7 @@ export const useSingleProduct = (id: Number) => {
 	return useQuery({
 		queryKey: ['product', id],
 		queryFn: () => productService.getSingleProduct(id),
-		staleTime: 0,
+		staleTime: 30000,
 	});
 };
 
