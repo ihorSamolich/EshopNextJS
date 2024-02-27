@@ -13,7 +13,7 @@ const roboto = Inter({
 
 export const metadata: Metadata = {
 	title: {
-		default: 'Home | ESHOP',
+		default: 'Головна | ESHOP',
 		template: '%s | ESHOP',
 	},
 	description: 'ESHOP main page.',

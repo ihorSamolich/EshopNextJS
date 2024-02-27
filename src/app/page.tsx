@@ -5,8 +5,8 @@ import { Suspense } from 'react';
 export default function HomePage() {
 	return (
 		<main>
-			<Hero />
 			<Suspense>
+				<Hero />
 				<HotSales />
 			</Suspense>
 		</main>
